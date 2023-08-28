@@ -114,6 +114,7 @@ struct sway_view {
 	} events;
 
 	int max_render_time; // In milliseconds
+	int max_cursor_latency; // In microseconds
 
 	enum seat_config_shortcuts_inhibit shortcuts_inhibit;
 

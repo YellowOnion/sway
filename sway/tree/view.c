@@ -7,6 +7,7 @@
 #include <wlr/types/wlr_ext_foreign_toplevel_list_v1.h>
 #include <wlr/types/wlr_foreign_toplevel_management_v1.h>
 #include <wlr/types/wlr_fractional_scale_v1.h>
+#include <wlr/types/wlr_cursor.h>
 #include <wlr/types/wlr_output_layout.h>
 #include <wlr/types/wlr_server_decoration.h>
 #include <wlr/types/wlr_subcompositor.h>

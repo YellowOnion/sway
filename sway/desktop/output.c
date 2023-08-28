@@ -261,6 +261,10 @@ static bool output_can_tear(struct sway_output *output) {
 
 static int output_repaint_timer_handler(void *data) {
 	struct sway_output *output = data;
+	struct timespec now;
+
+	clock_gettime(CLOCK_MONOTONIC, &now);
+	wlr_output_cursor_move_any_expired(output->wlr_output, &now);
 
 	output->wlr_output->frame_pending = false;
 	if (!output->enabled) {
@@ -279,6 +283,8 @@ static int output_repaint_timer_handler(void *data) {
 			!pixman_region32_not_empty(&scene_output->pending_commit_damage)) {
 		return 0;
 	}
+
+	wlr_output_cursor_move_all_deferred(wlr_output, &now);
 
 	struct wlr_output_state pending;
 	wlr_output_state_init(&pending);

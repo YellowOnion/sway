@@ -122,6 +122,7 @@ static const struct cmd_handler command_handlers[] = {
 	{ "kill", cmd_kill },
 	{ "layout", cmd_layout },
 	{ "mark", cmd_mark },
+	{ "max_cursor_latency", cmd_max_cursor_latency },
 	{ "max_render_time", cmd_max_render_time },
 	{ "move", cmd_move },
 	{ "nop", cmd_nop },
