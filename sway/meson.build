@@ -73,6 +73,7 @@ sway_sources = files(
 	'commands/kill.c',
 	'commands/mark.c',
 	'commands/max_render_time.c',
+	'commands/max_cursor_latency.c',
 	'commands/opacity.c',
 	'commands/include.c',
 	'commands/input.c',

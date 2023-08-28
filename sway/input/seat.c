@@ -1236,9 +1236,11 @@ static void seat_set_workspace_focus(struct sway_seat *seat, struct sway_node *n
 		seat_send_focus(&container->node, seat);
 	}
 
+	int max_cursor_latency = 0;
 	// emit ipc events
 	set_workspace(seat, new_workspace);
 	if (container && container->view) {
+		max_cursor_latency = container->view->max_cursor_latency;
 		ipc_event_window(container, "focus");
 	}
 
@@ -1287,6 +1289,9 @@ static void seat_set_workspace_focus(struct sway_seat *seat, struct sway_node *n
 	if (last_workspace && last_workspace != new_output_last_ws) {
 		workspace_consider_destroy(last_workspace);
 	}
+
+	if (seat->cursor)
+		wlr_cursor_set_max_latency(seat->cursor->cursor, max_cursor_latency * 1000);
 
 	seat->has_focus = true;
 

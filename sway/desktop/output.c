@@ -565,6 +565,10 @@ static int output_repaint_timer_handler(void *data) {
 
 	wlr_output->frame_pending = false;
 
+	struct timespec now;
+	clock_gettime(CLOCK_MONOTONIC, &now);
+	wlr_output_cursor_move_any_expired(wlr_output, &now);
+
 	if (!wlr_output->needs_frame &&
 			!output->gamma_lut_changed &&
 			!pixman_region32_not_empty(&output->damage_ring.current)) {
@@ -575,6 +579,8 @@ static int output_repaint_timer_handler(void *data) {
 	if (workspace == NULL) {
 		return 0;
 	}
+
+	wlr_output_cursor_move_all_deferred(wlr_output, &now);
 
 	struct sway_container *fullscreen_con = root->fullscreen_global;
 	if (!fullscreen_con) {
@@ -657,7 +663,6 @@ static int output_repaint_timer_handler(void *data) {
 		.pass = render_pass,
 	};
 
-	struct timespec now;
 	clock_gettime(CLOCK_MONOTONIC, &now);
 
 	output_render(&ctx);

@@ -588,6 +588,7 @@ static void ipc_json_describe_view(struct sway_container *c, json_object *object
 	json_object_object_add(object, "geometry", ipc_json_create_rect(&geometry));
 
 	json_object_object_add(object, "max_render_time", json_object_new_int(c->view->max_render_time));
+	json_object_object_add(object, "max_cursor_latency", json_object_new_int(c->view->max_cursor_latency));
 
 	json_object_object_add(object, "shell", json_object_new_string(view_get_shell(c->view)));
 
